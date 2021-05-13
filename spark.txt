@@ -1,0 +1,8 @@
+scala> val rdd = sc.parallelize(List(("fruit_name","color","location"),("Apple","red","j&k")))
+rdd: org.apache.spark.rdd.RDD[(String, String, String)] = ParallelCollectionRDD[0] at parallelize at <console>:24
+
+scala> val rdd2 = rdd.filter(tu=> (!tu._1.startsWith("fruit_name")))
+rdd2: org.apache.spark.rdd.RDD[(String, String, String)] = MapPartitionsRDD[1] at filter at <console>:25
+
+scala> rdd2.first
+res0: (String, String, String) = (Apple,red,j&k)

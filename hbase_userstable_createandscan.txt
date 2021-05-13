@@ -1,0 +1,521 @@
+user@ubuntu:~$ start-all.sh
+This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh
+21/05/10 04:57:26 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [nn1.cluster.com]
+nn1.cluster.com: namenode running as process 2805. Stop it first.
+nn1.cluster.com: datanode running as process 2924. Stop it first.
+Starting secondary namenodes [0.0.0.0]
+0.0.0.0: secondarynamenode running as process 3118. Stop it first.
+21/05/10 04:57:36 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+starting yarn daemons
+resourcemanager running as process 3283. Stop it first.
+nn1.cluster.com: nodemanager running as process 3402. Stop it first.
+user@ubuntu:~$ start-hbase.sh
+master running as process 3813. Stop it first.
+user@ubuntu:~$ jps
+3283 ResourceManager
+3813 HMaster
+2805 NameNode
+5800 Jps
+3402 NodeManager
+2924 DataNode
+3118 SecondaryNameNode
+user@ubuntu:~$ hbase shell
+2021-05-10 05:00:34,803 WARN  [main] util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/home/user/hbase-1.2.2/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/user/hadoop-2.6.0/share/hadoop/common/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+HBase Shell; enter 'help<RETURN>' for list of supported commands.
+Type "exit<RETURN>" to leave the HBase Shell
+Version 1.2.2, r3f671c1ead70d249ea4598f1bbcc5151322b3a13, Fri Jul  1 08:28:55 CDT 2016
+
+hbase(main):001:0> list
+TABLE                                                                           
+0 row(s) in 0.7590 seconds
+
+=> []
+hbase(main):002:0> create 'users','Name','Image'
+0 row(s) in 1.3450 seconds
+
+=> Hbase::Table - users
+hbase(main):003:0> put 'users','user1','Name:Fname','Mahesh'
+0 row(s) in 0.4290 seconds
+
+hbase(main):004:0> put 'users','user1','Name:Lname','Kumar'
+0 row(s) in 0.0340 seconds
+
+hbase(main):005:0> put 'users','user1','Image:Image','mahesh.jpg'
+0 row(s) in 0.0460 seconds
+
+hbase(main):006:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620648442300, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+1 row(s) in 0.1360 seconds
+
+hbase(main):007:0> put 'users','user2','Name:Fname','David'
+0 row(s) in 0.0250 seconds
+
+hbase(main):008:0>  put 'users','user2','Name:Lname','John'
+0 row(s) in 0.0270 seconds
+
+hbase(main):009:0> put 'users','user2','Image:Image','david.jpg'
+0 row(s) in 0.0270 seconds
+
+hbase(main):010:0> put 'users','user3','Name:Fname','Anand'
+0 row(s) in 0.0310 seconds
+
+hbase(main):011:0> put 'users','user3','Name:Lname','Balaji'
+0 row(s) in 0.0260 seconds
+
+hbase(main):012:0> put 'users','user3','Image:Image','anand.jpg'
+0 row(s) in 0.0350 seconds
+
+hbase(main):013:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620648442300, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+ user2                column=Image:Image, timestamp=1620648584070, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620648558426, value=David   
+ user2                column=Name:Lname, timestamp=1620648571270, value=John    
+ user3                column=Image:Image, timestamp=1620648623985, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620648598199, value=Anand   
+ user3                column=Name:Lname, timestamp=1620648612036, value=Balaji  
+3 row(s) in 0.0880 seconds
+
+hbase(main):006:0> put 'users','user4','Name:Fname','Pallashree'
+0 row(s) in 0.1010 seconds
+
+hbase(main):007:0>  put 'users','user4','Name:Lname','Coomer'
+0 row(s) in 0.0300 seconds
+
+hbase(main):008:0> put 'users','user4','Image:Image','pallashree.jpg'
+0 row(s) in 0.0160 seconds
+
+hbase(main):010:0> put 'users','user5','Name:Fname','Sayantoni'
+0 row(s) in 0.0210 seconds
+
+hbase(main):011:0> 
+hbase(main):012:0*  put 'users','user5','Name:Lname','Coomer'
+0 row(s) in 0.0240 seconds
+
+hbase(main):013:0> put 'users','user5','Image:Image','sayantoni.jpg'
+0 row(s) in 0.0180 seconds
+
+hbase(main):014:0> put 'users','user6','Name:Fname','Chandrani'
+0 row(s) in 0.0280 seconds
+
+hbase(main):015:0>  put 'users','user6','Name:Lname','Coomer'
+0 row(s) in 0.0440 seconds
+
+hbase(main):016:0> put 'users','user6','Image:Image','chandrani.jpg'
+0 row(s) in 0.0290 seconds
+
+hbase(main):017:0> put 'users','user7','Name:Fname','Sajal'
+0 row(s) in 0.0240 seconds
+
+hbase(main):018:0> put 'users','user7','Name:Lname','Coomer'
+0 row(s) in 0.0160 seconds
+
+hbase(main):019:0> put 'users','user7','Image:Image','sajal.jpg'
+0 row(s) in 0.0110 seconds
+
+hbase(main):020:0> put 'users','user8','Name:Fname','Jacky'
+0 row(s) in 0.0200 seconds
+
+hbase(main):021:0>  put 'users','user8','Name:Lname','Coomer'
+0 row(s) in 0.0430 seconds
+
+hbase(main):022:0> put 'users','user8','Image:Image','jacky.jpg'
+0 row(s) in 0.0290 seconds
+
+hbase(main):023:0> put 'users','user9','Name:Fname','Trijit'
+0 row(s) in 0.0110 seconds
+
+hbase(main):024:0>  put 'users','user9','Name:Lname','Goswami'
+0 row(s) in 0.0200 seconds
+
+hbase(main):025:0> put 'users','user9','Image:Image','trijit.jpg'
+0 row(s) in 0.0130 seconds
+
+hbase(main):026:0> put 'users','user10','Name:Fname','Sucheta'
+0 row(s) in 0.0220 seconds
+
+hbase(main):027:0>  put 'users','user10','Name:Lname','Goswami'
+0 row(s) in 0.0130 seconds
+
+hbase(main):028:0> put 'users','user10','Image:Image','sucheta.jpg'
+0 row(s) in 0.0290 seconds
+
+
+hbase(main):029:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620648442300, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+ user10               column=Image:Image, timestamp=1620664202854, value=sucheta
+                      .jpg                                                      
+ user10               column=Name:Fname, timestamp=1620664178908, value=Sucheta 
+ user10               column=Name:Lname, timestamp=1620664190878, value=Goswami 
+ user2                column=Image:Image, timestamp=1620648584070, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620648558426, value=David   
+ user2                column=Name:Lname, timestamp=1620648571270, value=John    
+ user3                column=Image:Image, timestamp=1620648623985, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620648598199, value=Anand   
+ user3                column=Name:Lname, timestamp=1620648612036, value=Balaji  
+ user4                column=Image:Image, timestamp=1620663868150, value=pallash
+                      ree.jpg                                                   
+ user4                column=Name:Fname, timestamp=1620663837684, value=Pallashr
+                      ee                                                        
+ user4                column=Name:Lname, timestamp=1620663856977, value=Coomer  
+ user5                column=Image:Image, timestamp=1620663928058, value=sayanto
+                      ni.jpg                                                    
+ user5                column=Name:Fname, timestamp=1620663898590, value=Sayanton
+                      i                                                         
+ user5                column=Name:Lname, timestamp=1620663914230, value=Coomer  
+ user6                column=Image:Image, timestamp=1620663978597, value=chandra
+                      ni.jpg                                                    
+ user6                column=Name:Fname, timestamp=1620663954118, value=Chandran
+                      i                                                         
+ user6                column=Name:Lname, timestamp=1620663966075, value=Coomer  
+ user7                column=Image:Image, timestamp=1620664029620, value=sajal.j
+                      pg                                                        
+ user7                column=Name:Fname, timestamp=1620664004407, value=Sajal   
+ user7                column=Name:Lname, timestamp=1620664017289, value=Coomer  
+ user8                column=Image:Image, timestamp=1620664076091, value=jacky.j
+                      pg                                                        
+ user8                column=Name:Fname, timestamp=1620664052410, value=Jacky   
+ user8                column=Name:Lname, timestamp=1620664065602, value=Coomer  
+ user9                column=Image:Image, timestamp=1620664131375, value=trijit.
+                      jpg                                                       
+ user9                column=Name:Fname, timestamp=1620664103818, value=Trijit  
+ user9                column=Name:Lname, timestamp=1620664117445, value=Goswami 
+10 row(s) in 0.1330 seconds
+
+hbase(main):030:0> scan 'users',{LIMIT => 3}
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620648442300, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+ user10               column=Image:Image, timestamp=1620664202854, value=sucheta
+                      .jpg                                                      
+ user10               column=Name:Fname, timestamp=1620664178908, value=Sucheta 
+ user10               column=Name:Lname, timestamp=1620664190878, value=Goswami 
+ user2                column=Image:Image, timestamp=1620648584070, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620648558426, value=David   
+ user2                column=Name:Lname, timestamp=1620648571270, value=John    
+3 row(s) in 0.0760 seconds
+
+hbase(main):011:0> scan 'users',{COLUMN=>'Name:Fname'}
+ROW                   COLUMN+CELL                                               
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user10               column=Name:Fname, timestamp=1620664178908, value=Sucheta 
+ user2                column=Name:Fname, timestamp=1620648558426, value=David   
+ user3                column=Name:Fname, timestamp=1620648598199, value=Anand   
+ user4                column=Name:Fname, timestamp=1620663837684, value=Pallashr
+                      ee                                                        
+ user5                column=Name:Fname, timestamp=1620663898590, value=Sayanton
+                      i                                                         
+ user6                column=Name:Fname, timestamp=1620663954118, value=Chandran
+                      i                                                         
+ user7                column=Name:Fname, timestamp=1620664004407, value=Sajal   
+ user8                column=Name:Fname, timestamp=1620664052410, value=Jacky   
+ user9                column=Name:Fname, timestamp=1620664103818, value=Trijit  
+10 row(s) in 0.1180 seconds
+
+
+hbase(main):013:0> scan 'users',{COLUMN=>'Name:Lname'}
+ROW                   COLUMN+CELL                                               
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+ user10               column=Name:Lname, timestamp=1620664190878, value=Goswami 
+ user2                column=Name:Lname, timestamp=1620648571270, value=John    
+ user3                column=Name:Lname, timestamp=1620648612036, value=Balaji  
+ user4                column=Name:Lname, timestamp=1620663856977, value=Coomer  
+ user5                column=Name:Lname, timestamp=1620663914230, value=Coomer  
+ user6                column=Name:Lname, timestamp=1620663966075, value=Coomer  
+ user7                column=Name:Lname, timestamp=1620664017289, value=Coomer  
+ user8                column=Name:Lname, timestamp=1620664065602, value=Coomer  
+ user9                column=Name:Lname, timestamp=1620664117445, value=Goswami 
+10 row(s) in 0.0770 seconds
+
+hbase(main):023:0> scan 'users',{LIMIT => 10, STARTROW => 'user4'}
+ROW                   COLUMN+CELL                                               
+ user4                column=Image:Image, timestamp=1620663868150, value=pallash
+                      ree.jpg                                                   
+ user4                column=Name:Fname, timestamp=1620663837684, value=Pallashr
+                      ee                                                        
+ user4                column=Name:Lname, timestamp=1620663856977, value=Coomer  
+ user5                column=Image:Image, timestamp=1620663928058, value=sayanto
+                      ni.jpg                                                    
+ user5                column=Name:Fname, timestamp=1620663898590, value=Sayanton
+                      i                                                         
+ user5                column=Name:Lname, timestamp=1620663914230, value=Coomer  
+ user6                column=Image:Image, timestamp=1620663978597, value=chandra
+                      ni.jpg                                                    
+ user6                column=Name:Fname, timestamp=1620663954118, value=Chandran
+                      i                                                         
+ user6                column=Name:Lname, timestamp=1620663966075, value=Coomer  
+ user7                column=Image:Image, timestamp=1620664029620, value=sajal.j
+                      pg                                                        
+ user7                column=Name:Fname, timestamp=1620664004407, value=Sajal   
+ user7                column=Name:Lname, timestamp=1620664017289, value=Coomer  
+ user8                column=Image:Image, timestamp=1620664076091, value=jacky.j
+                      pg                                                        
+ user8                column=Name:Fname, timestamp=1620664052410, value=Jacky   
+ user8                column=Name:Lname, timestamp=1620664065602, value=Coomer  
+ user9                column=Image:Image, timestamp=1620664131375, value=trijit.
+                      jpg                                                       
+ user9                column=Name:Fname, timestamp=1620664103818, value=Trijit  
+ user9                column=Name:Lname, timestamp=1620664117445, value=Goswami 
+6 row(s) in 0.0610 seconds
+
+hbase(main):025:0> delete 'users','user10','Name:Lname'
+0 row(s) in 0.0520 seconds
+
+hbase(main):026:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620648442300, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+ user10               column=Image:Image, timestamp=1620664202854, value=sucheta
+                      .jpg                                                      
+ user10               column=Name:Fname, timestamp=1620664178908, value=Sucheta 
+ user2                column=Image:Image, timestamp=1620648584070, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620648558426, value=David   
+ user2                column=Name:Lname, timestamp=1620648571270, value=John    
+ user3                column=Image:Image, timestamp=1620648623985, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620648598199, value=Anand   
+ user3                column=Name:Lname, timestamp=1620648612036, value=Balaji  
+ user4                column=Image:Image, timestamp=1620663868150, value=pallash
+                      ree.jpg                                                   
+ user4                column=Name:Fname, timestamp=1620663837684, value=Pallashr
+                      ee                                                        
+ user4                column=Name:Lname, timestamp=1620663856977, value=Coomer  
+ user5                column=Image:Image, timestamp=1620663928058, value=sayanto
+                      ni.jpg                                                    
+ user5                column=Name:Fname, timestamp=1620663898590, value=Sayanton
+                      i                                                         
+ user5                column=Name:Lname, timestamp=1620663914230, value=Coomer  
+ user6                column=Image:Image, timestamp=1620663978597, value=chandra
+                      ni.jpg                                                    
+ user6                column=Name:Fname, timestamp=1620663954118, value=Chandran
+                      i                                                         
+ user6                column=Name:Lname, timestamp=1620663966075, value=Coomer  
+ user7                column=Image:Image, timestamp=1620664029620, value=sajal.j
+                      pg                                                        
+ user7                column=Name:Fname, timestamp=1620664004407, value=Sajal   
+ user7                column=Name:Lname, timestamp=1620664017289, value=Coomer  
+ user8                column=Image:Image, timestamp=1620664076091, value=jacky.j
+                      pg                                                        
+ user8                column=Name:Fname, timestamp=1620664052410, value=Jacky   
+ user8                column=Name:Lname, timestamp=1620664065602, value=Coomer  
+ user9                column=Image:Image, timestamp=1620664131375, value=trijit.
+                      jpg                                                       
+ user9                column=Name:Fname, timestamp=1620664103818, value=Trijit  
+ user9                column=Name:Lname, timestamp=1620664117445, value=Goswami 
+10 row(s) in 0.0640 seconds
+
+
+hbase(main):028:0> delete 'users','user2','Name:Fname'
+0 row(s) in 0.0360 seconds
+
+hbase(main):029:0> delete 'users','user2','Name:Lname'
+0 row(s) in 0.0260 seconds
+
+hbase(main):030:0> delete 'users','user2','Image:Image'
+0 row(s) in 0.0150 seconds
+
+hbase(main):031:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620648442300, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620648184529, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620648243849, value=Kumar   
+ user10               column=Image:Image, timestamp=1620664202854, value=sucheta
+                      .jpg                                                      
+ user10               column=Name:Fname, timestamp=1620664178908, value=Sucheta 
+ user3                column=Image:Image, timestamp=1620648623985, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620648598199, value=Anand   
+ user3                column=Name:Lname, timestamp=1620648612036, value=Balaji  
+ user4                column=Image:Image, timestamp=1620663868150, value=pallash
+                      ree.jpg                                                   
+ user4                column=Name:Fname, timestamp=1620663837684, value=Pallashr
+                      ee                                                        
+ user4                column=Name:Lname, timestamp=1620663856977, value=Coomer  
+ user5                column=Image:Image, timestamp=1620663928058, value=sayanto
+                      ni.jpg                                                    
+ user5                column=Name:Fname, timestamp=1620663898590, value=Sayanton
+                      i                                                         
+ user5                column=Name:Lname, timestamp=1620663914230, value=Coomer  
+ user6                column=Image:Image, timestamp=1620663978597, value=chandra
+                      ni.jpg                                                    
+ user6                column=Name:Fname, timestamp=1620663954118, value=Chandran
+                      i                                                         
+ user6                column=Name:Lname, timestamp=1620663966075, value=Coomer  
+ user7                column=Image:Image, timestamp=1620664029620, value=sajal.j
+                      pg                                                        
+ user7                column=Name:Fname, timestamp=1620664004407, value=Sajal   
+ user7                column=Name:Lname, timestamp=1620664017289, value=Coomer  
+ user8                column=Image:Image, timestamp=1620664076091, value=jacky.j
+                      pg                                                        
+ user8                column=Name:Fname, timestamp=1620664052410, value=Jacky   
+ user8                column=Name:Lname, timestamp=1620664065602, value=Coomer  
+ user9                column=Image:Image, timestamp=1620664131375, value=trijit.
+                      jpg                                                       
+ user9                column=Name:Fname, timestamp=1620664103818, value=Trijit  
+ user9                column=Name:Lname, timestamp=1620664117445, value=Goswami 
+9 row(s) in 0.0700 seconds
+
+hbase(main):033:0> truncate 'users'
+Truncating 'users' table (it may take a while):
+ - Disabling table...
+ - Truncating table...
+0 row(s) in 3.8740 seconds
+
+hbase(main):034:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+0 row(s) in 0.1900 seconds
+
+hbase(main):036:0> put 'users','user1','Name:Fname','Mahesh'
+0 row(s) in 0.0710 seconds
+
+hbase(main):037:0>  put 'users','user1','Name:Lname','Kumar'
+0 row(s) in 0.0090 seconds
+
+hbase(main):038:0> put 'users','user1','Image:Image','mahesh.jpg'
+0 row(s) in 0.0100 seconds
+
+hbase(main):039:0> 
+hbase(main):040:0* 
+hbase(main):041:0* put 'users','user2','Name:Fname','David'
+0 row(s) in 0.0140 seconds
+
+hbase(main):042:0>  put 'users','user2','Name:Lname','John'
+0 row(s) in 0.0090 seconds
+
+hbase(main):043:0> put 'users','user2','Image:Image','david.jpg'
+0 row(s) in 0.0080 seconds
+
+hbase(main):044:0> 
+hbase(main):045:0* put 'users','user3','Name:Fname','Anand'
+0 row(s) in 0.0050 seconds
+
+hbase(main):046:0>  put 'users','user3','Name:Lname','Balaji'
+0 row(s) in 0.0060 seconds
+
+hbase(main):047:0> put 'users','user3','Image:Image','anand.jpg'
+0 row(s) in 0.0350 seconds
+
+hbase(main):048:0> alter 'users',{NAME => 'Email'}
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 3.1960 seconds
+
+hbase(main):049:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620668486927, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620668486871, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620668486901, value=Kumar   
+ user2                column=Image:Image, timestamp=1620668487011, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620668486974, value=David   
+ user2                column=Name:Lname, timestamp=1620668486999, value=John    
+ user3                column=Image:Image, timestamp=1620668505844, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620668487043, value=Anand   
+ user3                column=Name:Lname, timestamp=1620668487066, value=Balaji  
+3 row(s) in 0.0530 seconds
+
+hbase(main):050:0> put 'users','user3','Email:Email','anand@gmail.com.jpg'
+0 row(s) in 0.0200 seconds
+
+hbase(main):051:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620668486927, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620668486871, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620668486901, value=Kumar   
+ user2                column=Image:Image, timestamp=1620668487011, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620668486974, value=David   
+ user2                column=Name:Lname, timestamp=1620668486999, value=John    
+ user3                column=Email:Email, timestamp=1620668828218, value=anand@g
+                      mail.com.jpg                                              
+ user3                column=Image:Image, timestamp=1620668505844, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620668487043, value=Anand   
+ user3                column=Name:Lname, timestamp=1620668487066, value=Balaji  
+3 row(s) in 0.0430 seconds
+
+hbase(main):052:0> alter 'users','delete'=>'Email'
+Updating all regions with the new schema...
+0/1 regions updated.
+1/1 regions updated.
+Done.
+0 row(s) in 2.9800 seconds
+
+hbase(main):053:0> scan 'users'
+ROW                   COLUMN+CELL                                               
+ user1                column=Image:Image, timestamp=1620668486927, value=mahesh.
+                      jpg                                                       
+ user1                column=Name:Fname, timestamp=1620668486871, value=Mahesh  
+ user1                column=Name:Lname, timestamp=1620668486901, value=Kumar   
+ user2                column=Image:Image, timestamp=1620668487011, value=david.j
+                      pg                                                        
+ user2                column=Name:Fname, timestamp=1620668486974, value=David   
+ user2                column=Name:Lname, timestamp=1620668486999, value=John    
+ user3                column=Image:Image, timestamp=1620668505844, value=anand.j
+                      pg                                                        
+ user3                column=Name:Fname, timestamp=1620668487043, value=Anand   
+ user3                column=Name:Lname, timestamp=1620668487066, value=Balaji  
+3 row(s) in 0.0280 seconds
+
+hbase(main):054:0> create 'movies','title','primary_director','year_released','genre'
+0 row(s) in 1.2960 seconds
+
+=> Hbase::Table - movies
+
+hbase(main):061:0> put 'movies','1','title:title','The Lost World'
+0 row(s) in 0.1450 seconds
+
+hbase(main):062:0> put 'movies','1','primary_director:primary_director','Steven Spielberg'
+0 row(s) in 0.0190 seconds
+
+hbase(main):063:0> put 'movies','1','year_released:year_released','1997'
+0 row(s) in 0.0170 seconds
+
+hbase(main):064:0> put 'movies','1','genre:genre','sci-fi'
+0 row(s) in 0.0090 seconds
+
+hbase(main):065:0> scan 'movies'
+ROW                   COLUMN+CELL                                               
+ 1                    column=genre:genre, timestamp=1620669604873, value=sci-fi 
+ 1                    column=primary_director:primary_director, timestamp=162066
+                      9578594, value=Steven Spielberg                           
+ 1                    column=title:title, timestamp=1620669560064, value=The Los
+                      t World                                                   
+ 1                    column=year_released:year_released, timestamp=162066959420
+                      2, value=1997                                             
+1 row(s) in 0.0300 seconds
+
+

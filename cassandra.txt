@@ -1,0 +1,65 @@
+cqlsh
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.10 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> create keyspace "DEMO" with replication = {'class':'SimpleStrategy','replication_factor':3};
+cqlsh> describe keyspaces;
+
+"DEMO"  system_schema  system_auth  system  system_distributed  system_traces
+
+cqlsh> use "DEMO";
+
+cqlsh:DEMO> create columnfamily student(
+        ...          regno INT,
+        ...         sname VARCHAR,
+        ...          mark1 INT,
+        ...          mark2 INT,
+        ...        mark3 INT,
+        ...        PRIMARY KEY(regno)
+        ...         );
+cqlsh:DEMO> describe columnfamilies;
+
+student
+
+cqlsh:DEMO> describe student;
+
+CREATE TABLE "DEMO".student (
+    regno int PRIMARY KEY,
+    mark1 int,
+    mark2 int,
+    mark3 int,
+    sname text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:DEMO> insert into student(regno,sname,mark1,mark2,mark3) values(1000,'RAJ',56,76,91);
+cqlsh:DEMO> insert into student(regno,sname,mark1,mark2,mark3) values(1001,'AMIT',96,86,91);
+cqlsh:DEMO> insert into student(regno,sname,mark1,mark2,mark3) values(1002,'DINESH',82,81,84);
+cqlsh:DEMO> select * from student;
+
+ regno | mark1 | mark2 | mark3 | sname
+-------+-------+-------+-------+--------
+  1001 |    96 |    86 |    91 |   AMIT
+  1002 |    82 |    81 |    84 | DINESH
+  1000 |    56 |    76 |    91 |    RAJ
+
+(3 rows)
+
+cqlsh:DEMO> select * from student where sname = 'AMIT' ALLOW FILTERING;
+
+ regno | mark1 | mark2 | mark3 | sname
+-------+-------+-------+-------+-------
+  1001 |    96 |    86 |    91 |  AMIT
+

@@ -1,0 +1,153 @@
+user@ubuntu:~$ hadoop fs
+Usage: hadoop fs [generic options]
+	[-appendToFile <localsrc> ... <dst>]
+	[-cat [-ignoreCrc] <src> ...]
+	[-checksum <src> ...]
+	[-chgrp [-R] GROUP PATH...]
+	[-chmod [-R] <MODE[,MODE]... | OCTALMODE> PATH...]
+	[-chown [-R] [OWNER][:[GROUP]] PATH...]
+	[-copyFromLocal [-f] [-p] [-l] <localsrc> ... <dst>]
+	[-copyToLocal [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-count [-q] [-h] <path> ...]
+	[-cp [-f] [-p | -p[topax]] <src> ... <dst>]
+	[-createSnapshot <snapshotDir> [<snapshotName>]]
+	[-deleteSnapshot <snapshotDir> <snapshotName>]
+	[-df [-h] [<path> ...]]
+	[-du [-s] [-h] <path> ...]
+	[-expunge]
+	[-get [-p] [-ignoreCrc] [-crc] <src> ... <localdst>]
+	[-getfacl [-R] <path>]
+	[-getfattr [-R] {-n name | -d} [-e en] <path>]
+	[-getmerge [-nl] <src> <localdst>]
+	[-help [cmd ...]]
+	[-ls [-d] [-h] [-R] [<path> ...]]
+	[-mkdir [-p] <path> ...]
+	[-moveFromLocal <localsrc> ... <dst>]
+	[-moveToLocal <src> <localdst>]
+	[-mv <src> ... <dst>]
+	[-put [-f] [-p] [-l] <localsrc> ... <dst>]
+	[-renameSnapshot <snapshotDir> <oldName> <newName>]
+	[-rm [-f] [-r|-R] [-skipTrash] <src> ...]
+	[-rmdir [--ignore-fail-on-non-empty] <dir> ...]
+	[-setfacl [-R] [{-b|-k} {-m|-x <acl_spec>} <path>]|[--set <acl_spec> <path>]]
+	[-setfattr {-n name [-v value] | -x name} <path>]
+	[-setrep [-R] [-w] <rep> <path> ...]
+	[-stat [format] <path> ...]
+	[-tail [-f] <file>]
+	[-test -[defsz] <path>]
+	[-text [-ignoreCrc] <src> ...]
+	[-touchz <path> ...]
+	[-usage [cmd ...]]
+
+Generic options supported are
+-conf <configuration file>     specify an application configuration file
+-D <property=value>            use value for given property
+-fs <local|namenode:port>      specify a namenode
+-jt <local|resourcemanager:port>    specify a ResourceManager
+-files <comma separated list of files>    specify comma separated files to be copied to the map reduce cluster
+-libjars <comma separated list of jars>    specify comma separated jar files to include in the classpath.
+-archives <comma separated list of archives>    specify comma separated archives to be unarchived on the compute machines.
+
+The general command line syntax is
+bin/hadoop command [genericOptions] [commandOptions]
+
+user@ubuntu:~$ hadoop fs -ls /
+21/05/06 02:36:31 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 4 items
+drwxr-xr-x   - user supergroup          0 2019-08-12 22:55 /sqoop_import_01
+-rw-r--r--   1 user supergroup        361 2019-08-12 02:01 /test.txt
+drwxrwx---   - user supergroup          0 2019-08-12 22:50 /tmp
+drwxr-xr-x   - user supergroup          0 2019-08-12 23:23 /user
+user@ubuntu:~$ hadoop fs -ls /user
+21/05/06 02:38:34 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+drwxr-xr-x   - user supergroup          0 2019-08-12 23:23 /user/flume
+drwxr-xr-x   - user supergroup          0 2019-08-12 22:51 /user/hive
+user@ubuntu:~$ hadoop fs -mkdir /data
+21/05/06 02:39:46 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+user@ubuntu:~$ hadoop fs -ls /
+21/05/06 02:40:13 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 5 items
+drwxr-xr-x   - user supergroup          0 2021-05-06 02:39 /data
+drwxr-xr-x   - user supergroup          0 2019-08-12 22:55 /sqoop_import_01
+-rw-r--r--   1 user supergroup        361 2019-08-12 02:01 /test.txt
+drwxrwx---   - user supergroup          0 2019-08-12 22:50 /tmp
+drwxr-xr-x   - user supergroup          0 2019-08-12 23:23 /user
+user@ubuntu:~$ pwd
+/home/user
+user@ubuntu:~$ hadoop fs -put /home/user/samples /data
+21/05/06 02:48:35 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+user@ubuntu:~$ hadoop fs -ls /
+21/05/06 02:48:47 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 5 items
+drwxr-xr-x   - user supergroup          0 2021-05-06 02:48 /data
+drwxr-xr-x   - user supergroup          0 2019-08-12 22:55 /sqoop_import_01
+-rw-r--r--   1 user supergroup        361 2019-08-12 02:01 /test.txt
+drwxrwx---   - user supergroup          0 2019-08-12 22:50 /tmp
+drwxr-xr-x   - user supergroup          0 2019-08-12 23:23 /user
+user@ubuntu:~$ hadoop fs -ls /data
+21/05/06 02:48:57 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+drwxr-xr-x   - user supergroup          0 2021-05-06 02:48 /data/samples
+user@ubuntu:~$ hadoop fs -ls /data/samples
+21/05/06 02:49:12 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 user supergroup         99 2021-05-06 02:48 /data/samples/Dept.txt
+-rw-r--r--   1 user supergroup        414 2021-05-06 02:48 /data/samples/Emp.txt
+user@ubuntu:~$ hadoop fs -cat /data/samples/Emp.txt
+21/05/06 03:01:27 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+EMPNO,ENAME,JOB,SAL,DEPTNO
+7369,SMITH,CLERK,800,20
+7499,ALLEN,SALESMAN,1600,30
+7521,WARD,SALESMAN,1250,30
+7566,JONES,MANAGER,2975,20
+7654,MARTIN,SALESMAN,1400,30
+7698,BLAKE,MANAGER,2850,30
+7782,CLARK,MANAGER,2450,10
+7788,SCOTT,ANALYST,3000,20
+7839,KING,PRESIDENT,5000,10
+7844,TURNER,SALESMAN,1500,30
+7876,ADAMS,CLERK,1100,20
+7900,JAMES,CLERK,950,30
+7902,FORD,ANALYST,3000,20
+7934,MILLER,CLERK,1300,10
+user@ubuntu:~$ hadoop fs -cat /data/samples/Dept.txt
+21/05/06 03:02:25 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+DEPTNO,DNAME,LOC
+10,ACCOUNTING,NEWYORK
+20,RESEARCH,DALLAS
+30,SALES,CHICAGO
+40,OPERATIONS,BOSTON
+user@ubuntu:~$ hadoop fs -cat /data/samples/Emp.txt|head -n 6 
+21/05/06 03:20:11 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+EMPNO,ENAME,JOB,SAL,DEPTNO
+7369,SMITH,CLERK,800,20
+7499,ALLEN,SALESMAN,1600,30
+7521,WARD,SALESMAN,1250,30
+7566,JONES,MANAGER,2975,20
+7654,MARTIN,SALESMAN,1400,30
+user@ubuntu:~$ hadoop fs -rm /data/samples/Dept.txt
+21/05/06 03:21:28 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+21/05/06 03:21:30 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted /data/samples/Dept.txt
+user@ubuntu:~$ hadoop fs -ls /data/samples
+21/05/06 03:22:27 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 1 items
+-rw-r--r--   1 user supergroup        414 2021-05-06 02:48 /data/samples/Emp.txt
+user@ubuntu:/home$ hadoop fs -copyToLocal /data/samples/Emp.txt /home/user
+21/05/06 03:25:33 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+user@ubuntu:~$ ls
+ant                    examples.desktop       pig_1620289413086.log
+apache-ant-1.9.9       hadoop                 Public
+apache-hive-2.1.1-bin  hadoop-2.6.0           samples
+custs.txt              HDFS                   spark
+derby.log              hive                   spark-2.1.1-bin-hadoop2.6
+Desktop                Music                  sqoop
+Documents              Pictures               sqoop-1.4.7.bin__hadoop-2.6.0
+Downloads              pig                    Templates
+dw10.txt               pig-0.17.0-src         test.txt
+eclipse                pig_1565674332872.log  txns1.txt
+eclipse-workspace      pig_1618761909932.log  Videos
+Emp.txt                pig_1618983689184.log
+open browser->http://localhost:50070->utilities->browse the file system
+
